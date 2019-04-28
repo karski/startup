@@ -15,6 +15,7 @@ import UserLocationList from "../components/UserLocationsList";
 
 import { festivalBounds, areaIdTemp } from "../constants";
 import { bounds2Viewport } from "../utils/geo";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 const mapStyle =
   "https://maps.watershedmap.org/styles/klokantech-basic/style.json";
@@ -30,8 +31,17 @@ const Map = props => {
   let locations = [];
   let mapRef = React.createRef();
   let divRef = React.useRef(null);
-  locations = JSON.parse(localStorage.getItem("tasks"));
-  console.log("locations", locations);
+  // locations = JSON.parse(localStorage.getItem("tasks"));
+  const { error, loading, value } = useCollection(props.db.collection("tasks"));
+  if (value) {
+    locations = value.docs;
+    console.log("locations", locations);
+    locations.map(l => {
+      console.log("cc", l.data());
+    });
+  }
+
+  console.log(error, loading, value);
   useEffect(() => {
     let el = document.getElementById("map");
     const vp = bounds2Viewport(festivalBounds, [
@@ -96,7 +106,7 @@ const Map = props => {
             />
           )}
           <AllLocationsMarkers
-            locations={locations}
+            // locations={locations}
             selectedMarker={selectedMarker}
             setSelectedMarker={setSelectedMarker}
           />

@@ -20,6 +20,7 @@ import { createLocation, updateLocation } from "../graphql/mutations";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import { reverseGeoLocation } from "../utils";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 // ! Necessary to set explicitly for error (from controlled to uncontrolled) not being thrown
 const emptyForm = {
@@ -29,11 +30,15 @@ const emptyForm = {
   locationPicture: ""
 };
 
-const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
+const AddLocationForm = ({
+  db,
+  formValues = emptyForm,
+  doneUpdating = null
+}) => {
   const [isValid, setIsValid] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadImage, setUploadImage] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState("");
   const [values, setValues] = useState(
     !isEmpty(formValues) ? formValues : { ...emptyForm }
   );
@@ -52,6 +57,10 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
       setIsValid(false);
     }
   });
+  // useEffect(() => {
+  // const { error, loading, value } = useCollectionData(db.collection("tasks"));
+  // console.log("value", value);
+  // }, []);
   // * Form Submit
   async function formSubmit(e) {
     e.preventDefault();
@@ -90,7 +99,7 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
           },
           address,
           locationPicture: imageUrl,
-          id: shortid.generate()
+          key: shortid.generate()
         };
         // const result = await API.graphql(
         //   graphqlOperation(updateLocation, {
@@ -137,7 +146,10 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
           },
           address,
           locationPicture: imageUrl,
-          id: shortid.generate()
+          key: shortid.generate(),
+          assignee: "",
+          assigned: false,
+          resolved: false
         };
         // const result = await API.graphql(
         //   graphqlOperation(createLocation, {
@@ -150,10 +162,13 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
         if (!tasks) {
           tasks = [];
         }
-        const newTasks = [...tasks, input];
-        console.log("newtasks", newTasks);
 
-        localStorage.setItem("tasks", JSON.stringify(newTasks));
+        console.log("DBXXXXXXXXXXXXXXXXXxx", db);
+        var setDoc = db
+          .collection("tasks")
+          .doc(input.key)
+          .set(input);
+        console.log("setDoc", setDoc);
         let result = " placeholder";
         dispatch({ type: UI_IS_ADDING_LOCATION, payload: false });
         dispatch({
@@ -221,7 +236,7 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
                   <option>Security</option>
                   <option>Sanitation</option>
                   <option>Supplies</option>
-                  <option>Broken</option>
+                  <option>Technical</option>
                   <option>Stewarts</option>
                   <option>Medical</option>
                 </Form.Control>
