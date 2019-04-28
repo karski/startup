@@ -7,6 +7,8 @@ import { useStore } from "../hooks";
 import { UI_SELECTED_MARKER } from "../reducers/actions";
 import ImageWithModal from "./ImageWithModal";
 
+import AddLocationForm from "./AddLocationForm";
+
 function SelectedMarkerInfo({ location }) {
   console.log("aaaaa", location);
   const shortenedID = location.id;
@@ -37,6 +39,10 @@ function SelectedMarkerInfo({ location }) {
               Head over to the detailed view
             </Link>
           </Card.Subtitle>
+          <AddLocationForm
+          formValues={true}
+          doneUpdating={true}
+        />
           <Button
             onClick={closeSidebar}
             block
