@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { Navbar, Nav, Dropdown } from "react-bootstrap";
-import { Auth } from "aws-amplify";
 import get from "lodash/get";
 
 import { useStore } from "../hooks/index";
@@ -17,7 +16,6 @@ const Navi = props => {
   });
   const handleLogout = async e => {
     e.preventDefault();
-    await Auth.signOut();
     console.log("logged out");
     dispatch({ type: AUTH_LOGOUT });
     props.history.push("/");
@@ -26,11 +24,11 @@ const Navi = props => {
     <div id="navbar">
       <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="#home">
-          <Link to="/">Map</Link>
+          <p>StartUp Weekend</p>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="basic-navbar-nav">
-          <Nav className="mr-auto">
+          {/* <Nav className="mr-auto">
             <Link to="/">Home</Link>
             {auth.isAuthenticated && <Link to="/settings">Settings</Link>}
           </Nav>
@@ -50,7 +48,7 @@ const Navi = props => {
             <Link className="login-link" to="/login">
               Login
             </Link>
-          )}
+          )} */}
         </Navbar.Collapse>
       </Navbar>
     </div>

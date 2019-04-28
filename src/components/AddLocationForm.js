@@ -14,7 +14,7 @@ import {
 } from "../reducers/actions";
 
 import { useStore } from "../hooks";
-import { API, graphqlOperation } from "aws-amplify";
+// import { API, graphqlOperation } from "aws-amplify";
 import { createLocation, updateLocation } from "../graphql/mutations";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
@@ -24,7 +24,7 @@ import { reverseGeoLocation } from "../utils";
 const emptyForm = {
   name: "",
   description: "",
-  type: "LikeIt",
+  type: "Security",
   locationPicture: ""
 };
 
@@ -90,12 +90,14 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
           address,
           locationPicture: imageUrl
         };
-        const result = await API.graphql(
-          graphqlOperation(updateLocation, {
-            input
-          })
-        );
-        console.log("final resolt", result);
+        // const result = await API.graphql(
+        //   graphqlOperation(updateLocation, {
+        //     input
+        //   })
+        // );
+        // TODO: set up firebase
+        // console.log("final resolt", result);
+        let result = "placeholder";
         dispatch({
           type: NOTIFICATION_NEW,
           category: "updated_location",
@@ -134,11 +136,13 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
           address,
           locationPicture: imageUrl
         };
-        const result = await API.graphql(
-          graphqlOperation(createLocation, {
-            input
-          })
-        );
+        // const result = await API.graphql(
+        //   graphqlOperation(createLocation, {
+        //     input
+        //   })
+        // );
+        // TODO: setup firebase
+        let result = " placeholder";
         dispatch({ type: UI_IS_ADDING_LOCATION, payload: false });
         dispatch({
           type: NOTIFICATION_NEW,

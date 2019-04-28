@@ -7,7 +7,7 @@ function BottomBar() {
   const [{ auth, other, ui }, dispatch] = useStore(); // eslint-disable-line
   return (
     <div id="bottom-bar">
-      <h5>Add a new location</h5>
+      <h5>Add new issue</h5>
       <AddLocationForm />
     </div>
   );

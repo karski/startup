@@ -6,7 +6,7 @@ import SelectedMarkerInfo from "../components/SelectedMarkerInfo";
 
 import { useStore } from "../hooks/index";
 import { OTHER_OFF, UI_TOGGLE_SIDEBAR } from "../reducers/actions";
-const MapComponent = React.lazy(() => import("../components/Map"));
+import Map from "../components/Map";
 
 const Home = () => {
   const [{ auth, other, ui }, dispatch] = useStore(); // eslint-disable-line
@@ -15,7 +15,8 @@ const Home = () => {
     <div id="home">
       {ui.bottomBarOpen && (
         <Bottombar>
-          {auth.isAuthenticating ? <div>Loading</div> : <AddLocationForm />}
+          {/* {auth.isAuthenticating ? <div>Loading</div> : <AddLocationForm />} */}
+          <AddLocationForm />
         </Bottombar>
       )}
       <Sidebar visible={ui.selectedLocation}>
@@ -24,7 +25,7 @@ const Home = () => {
         )}
       </Sidebar>
       <React.Suspense fallback={<div>Loading...</div>}>
-        <MapComponent />
+        <Map />
       </React.Suspense>
     </div>
   );

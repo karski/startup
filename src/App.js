@@ -15,7 +15,7 @@ const App = () => {
     <div id="app">
       <Navbar />
       <PageWrapper>
-        {auth.isAuthenticating ? <LoadingBar /> : <Routes />}
+        <Routes />
       </PageWrapper>
     </div>
   );

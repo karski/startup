@@ -12,16 +12,16 @@ import {
 } from "../reducers/actions";
 import shortid from "shortid";
 
-import { nevadaCityBounds, areaIdTemp } from "../constants";
+import { festivalBounds, areaIdTemp } from "../constants";
 import { bounds2Viewport } from "../utils/geo";
 
 const mapStyle =
   "https://maps.watershedmap.org/styles/klokantech-basic/style.json";
 
 const initialViewport = {
-  latitude: 39.26026190714627,
-  longitude: -121.01935,
-  zoom: 12
+  // latitude: 29.98391,
+  // longitude: -90.0813,
+  // zoom: 12
 };
 
 const Map = props => {
@@ -35,7 +35,7 @@ const Map = props => {
   let divRef = React.useRef(null);
   useEffect(() => {
     let el = document.getElementById("map");
-    const vp = bounds2Viewport(nevadaCityBounds, [
+    const vp = bounds2Viewport(festivalBounds, [
       el.offsetHeight,
       el.offsetWidth
     ]);
