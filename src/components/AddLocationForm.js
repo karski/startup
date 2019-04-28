@@ -14,6 +14,7 @@ import {
 } from "../reducers/actions";
 
 import { useStore } from "../hooks";
+import shortid from "shortid";
 // import { API, graphqlOperation } from "aws-amplify";
 import { createLocation, updateLocation } from "../graphql/mutations";
 import isEmpty from "lodash/isEmpty";
@@ -88,7 +89,8 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
             lng
           },
           address,
-          locationPicture: imageUrl
+          locationPicture: imageUrl,
+          id: shortid.generate()
         };
         // const result = await API.graphql(
         //   graphqlOperation(updateLocation, {
@@ -134,7 +136,8 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
             lng
           },
           address,
-          locationPicture: imageUrl
+          locationPicture: imageUrl,
+          id: shortid.generate()
         };
         // const result = await API.graphql(
         //   graphqlOperation(createLocation, {
@@ -142,9 +145,13 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
         //   })
         // );
         // TODO: setup firebase
-        const tasks = JSON.parse(localStorage.getItem("tasks"));
+        let tasks = JSON.parse(localStorage.getItem("tasks"));
         console.log("old tasks", tasks);
+        if (!tasks) {
+          tasks = [];
+        }
         const newTasks = [...tasks, input];
+        console.log("newtasks", newTasks);
 
         localStorage.setItem("tasks", JSON.stringify(newTasks));
         let result = " placeholder";

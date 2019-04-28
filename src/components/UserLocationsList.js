@@ -21,18 +21,21 @@ const UserLocationsList = ({ history }) => {
   const [isBeingEdited, setIsBeingEdited] = useState();
   const [isBeingCommented, setIsBeingCommented] = useState();
   const [fetchKey, setFetchKey] = useState(shortid.generate());
-  let locations = useUserLocations(auth.user, fetchKey);
+  // let locations = useUserLocations(auth.user, fetchKey);
 
+  let locations = [];
+  locations = JSON.parse(localStorage.getItem("tasks"));
   // TODO: Is there another way of updating locations than changing key
   // * DeltaQueries, Subscriptions?
   const removeLocation = async location => {
     setIsRemoving(location.id);
     try {
-      await API.graphql(
-        graphqlOperation(deleteLocation, {
-          input: { id: location.id }
-        })
-      );
+      // await API.graphql(
+      //   graphqlOperation(deleteLocation, {
+      //     input: { id: location.id }
+      //   })
+      // );
+      // TODO: XXX
       dispatch({
         type: NOTIFICATION_NEW,
         category: "delete_location",
@@ -72,7 +75,7 @@ const UserLocationsList = ({ history }) => {
   const linkToLocation = location => {
     console.log("location", location);
     // * using shortened ID
-    const shortenedID = location.id.substring(0, 8);
+    const shortenedID = location.id;
     history.push(`/location/${shortenedID}`);
   };
   return (
@@ -90,7 +93,7 @@ const UserLocationsList = ({ history }) => {
           {locations.map(l => (
             <tr key={l.id}>
               <td>{l.name}</td>
-              <td>{truncate(l.description, 5, true)}</td>
+              <td>{truncate(l.description, 25, true)}</td>
               <td>{l.type}</td>
               <td>
                 {isRemoving === l.id ? (

@@ -11,6 +11,7 @@ import {
   UI_OPEN_BOTTOMBAR
 } from "../reducers/actions";
 import shortid from "shortid";
+import UserLocationList from "../components/UserLocationsList";
 
 import { festivalBounds, areaIdTemp } from "../constants";
 import { bounds2Viewport } from "../utils/geo";
@@ -18,27 +19,26 @@ import { bounds2Viewport } from "../utils/geo";
 const mapStyle =
   "https://maps.watershedmap.org/styles/klokantech-basic/style.json";
 
-const initialViewport = {
-  // latitude: 29.98391,
-  // longitude: -90.0813,
-  // zoom: 12
-};
-
 const Map = props => {
   const [viewport, setViewport] = useState();
   const [fetchKey, setFetchKey] = useState(shortid.generate());
   const [refMap, setRefMap] = useState();
   const [selectedMarker, setSelectedMarker] = useState();
   const [{ map, ui }, dispatch] = useStore(); // eslint-disable-line
-  let locations = useAreaLocations(areaIdTemp, fetchKey);
+  // let locations = useAreaLocations(areaIdTemp, fetchKey);
+
+  let locations = [];
   let mapRef = React.createRef();
   let divRef = React.useRef(null);
+  locations = JSON.parse(localStorage.getItem("tasks"));
+  console.log("locations", locations);
   useEffect(() => {
     let el = document.getElementById("map");
     const vp = bounds2Viewport(festivalBounds, [
       el.offsetHeight,
       el.offsetWidth
     ]);
+    console.log("el", el.offsetWidth);
     setViewport({
       height: el.offsetHeight,
       width: el.offsetWidth,
@@ -67,38 +67,41 @@ const Map = props => {
   };
   return (
     <div id="map" ref={divRef}>
-      <AddLocationButton
-        isAddingLocation={ui.isAddingLocation}
-        clickAddLocationButton={handleOnAddLocationButtonClick}
-        markerPositionAlreadySet={map.markerPosition}
-      />
-      <ReactMapGL
-        ref={map => (mapRef = map)}
-        {...viewport}
-        mapStyle={mapStyle}
-        onViewportChange={vp => {
-          setViewport(vp);
-        }}
-        onClick={onMapClick}
-      >
-        {map.markerPosition && (
-          <Marker
-            className="marker"
-            {...map.markerPosition}
-            offsetLeft={-25}
-            offsetTop={-50}
-            draggable={true}
-            onDragEnd={e => {
-              dispatch({ type: MAP_SET_MARKER, position: e.lngLat });
-            }}
-          />
-        )}
-        <AllLocationsMarkers
-          locations={locations}
-          selectedMarker={selectedMarker}
-          setSelectedMarker={setSelectedMarker}
+      <div className="d-flex">
+        <AddLocationButton
+          isAddingLocation={ui.isAddingLocation}
+          clickAddLocationButton={handleOnAddLocationButtonClick}
+          markerPositionAlreadySet={map.markerPosition}
         />
-      </ReactMapGL>
+        <UserLocationList />
+        <ReactMapGL
+          ref={map => (mapRef = map)}
+          {...viewport}
+          mapStyle={mapStyle}
+          onViewportChange={vp => {
+            setViewport(vp);
+          }}
+          onClick={onMapClick}
+        >
+          {map.markerPosition && (
+            <Marker
+              className="marker"
+              {...map.markerPosition}
+              offsetLeft={-25}
+              offsetTop={-50}
+              draggable={true}
+              onDragEnd={e => {
+                dispatch({ type: MAP_SET_MARKER, position: e.lngLat });
+              }}
+            />
+          )}
+          <AllLocationsMarkers
+            locations={locations}
+            selectedMarker={selectedMarker}
+            setSelectedMarker={setSelectedMarker}
+          />
+        </ReactMapGL>
+      </div>
     </div>
   );
 };

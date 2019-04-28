@@ -11,6 +11,9 @@ function AllLocationsMarkers({ locations }) {
   const _onMarkerClick = location => {
     dispatch({ type: UI_SELECTED_MARKER, location });
   };
+  if (!locations) {
+    return null;
+  }
   return (
     <>
       {locations.length !== 0

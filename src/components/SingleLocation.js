@@ -8,10 +8,14 @@ import { Container, Row, Col, Card, Badge } from "react-bootstrap";
 import GoogleMapsLink from "./GoogleMapsLink";
 import { useLocationWithComments } from "../hooks";
 import shortid from "shortid";
+import find from "lodash/find";
 
 function SingleLocation({ id }) {
   const [fetchKey, setFetchKey] = useState(shortid.generate());
-  const location = useLocationWithComments(id, fetchKey);
+  // const location = useLocationWithComments(id, fetchKey);
+
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+  let location = find(tasks, o => o.id === id);
   const [{ auth }, dispatch] = useStore();
   const doneCommenting = () => {
     setFetchKey(shortid.generate());
@@ -37,7 +41,7 @@ function SingleLocation({ id }) {
                   </p>
                   <Card.Title>{location.description}</Card.Title>
                   <Badge variant="dark">{location.type}</Badge>
-                  <GoogleMapsLink location={location} />
+                  {/* <GoogleMapsLink location={location} /> */}
                 </Card.Body>
                 {location.response && <h4>{location.response}</h4>}
               </Card>

@@ -8,7 +8,8 @@ import { UI_SELECTED_MARKER } from "../reducers/actions";
 import ImageWithModal from "./ImageWithModal";
 
 function SelectedMarkerInfo({ location }) {
-  const shortenedID = location.id.substring(0, 8);
+  console.log("aaaaa", location);
+  const shortenedID = location.id;
   const [{ ui }, dispatch] = useStore(); // eslint-disable-line
   const closeSidebar = () => {
     dispatch({ type: UI_SELECTED_MARKER, location: null });

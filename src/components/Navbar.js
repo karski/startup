@@ -24,31 +24,25 @@ const Navi = props => {
     <div id="navbar">
       <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="#home">
-          <p>StartUp Weekend</p>
+          <Link to="/">ControlFreak</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="basic-navbar-nav">
-          {/* <Nav className="mr-auto">
+          <Nav className="mr-auto">
             <Link to="/">Home</Link>
-            {auth.isAuthenticated && <Link to="/settings">Settings</Link>}
+            <Link to="/settings">Overview</Link>
           </Nav>
-          {auth && auth.isAuthenticated ? (
-            <Dropdown id="dropdown-basic" alignRight>
-              <Dropdown.Toggle>
-                <Navbar.Text>Signed in as: {name}</Navbar.Text>
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => props.history.push("/settings")}>
-                  Settings
-                </Dropdown.Item>
-                <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          ) : (
-            <Link className="login-link" to="/login">
-              Login
-            </Link>
-          )} */}
+          <Dropdown id="dropdown-basic" alignRight>
+            <Dropdown.Toggle>
+              <Navbar.Text>Signed in as: {name}</Navbar.Text>
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => props.history.push("/settings")}>
+                Settings
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Navbar.Collapse>
       </Navbar>
     </div>

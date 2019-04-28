@@ -3,6 +3,7 @@ import AddLocationForm from "../components/AddLocationForm";
 import Sidebar from "../components/Sidebar";
 import Bottombar from "../components/BottomBar";
 import SelectedMarkerInfo from "../components/SelectedMarkerInfo";
+import UserLocationList from "../components/UserLocationsList";
 
 import { useStore } from "../hooks/index";
 import { OTHER_OFF, UI_TOGGLE_SIDEBAR } from "../reducers/actions";
@@ -24,9 +25,7 @@ const Home = () => {
           <SelectedMarkerInfo location={ui.selectedLocation} />
         )}
       </Sidebar>
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <Map />
-      </React.Suspense>
+      <Map />
     </div>
   );
 };
