@@ -118,12 +118,14 @@ const UserLocationsList = ({ history, db }) => {
                 rowColor = "green";
               }
               return (
-                <tr key={l.key} className={rowColor}>
-                  <td>{l.name}</td>
-                  <td>{truncate(l.description, 25, true)}</td>
+                <tr key={l.key}>
+                  <td className={rowColor}>{l.name}</td>
+                  <td className={rowColor}>
+                    {truncate(l.description, 25, true)}
+                  </td>
                   <td>{l.type}</td>
                   <td>{l.assigned && "Johnny"}</td>
-                  <td>
+                  <td className={rowColor}>
                     {l.resolved && (
                       <FontAwesomeIcon className="mx-2" icon="check-circle" />
                     )}
