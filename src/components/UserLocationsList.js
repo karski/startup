@@ -91,7 +91,7 @@ const UserLocationsList = ({ history, db }) => {
     console.log("location", location);
     // * using shortened ID
     const shortenedID = location.key;
-    history.push(`/location/${shortenedID}`);
+    //history.push(`/location/${shortenedID}`);
     dispatch({ type: UI_SELECTED_MARKER, location });
   };
   return (
