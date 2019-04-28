@@ -32,6 +32,10 @@
   height: 100%;
 }
 
+#location-list{
+  width: 45vw;
+}
+
 #map {
   height: 100%;
   position: relative;
@@ -39,8 +43,8 @@
 
 #add-location-button {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  bottom: 2rem;
+  right: 1rem;
   z-index: 2;
 }
 
