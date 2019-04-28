@@ -15,6 +15,8 @@ import { NOTIFICATION_CLOSE, NOTIFICATION_NEW } from "../reducers/actions";
 import { truncate } from "../utils";
 import shortid from "shortid";
 
+import { UI_SELECTED_MARKER } from "../reducers/actions";
+
 const UserLocationsList = ({ history }) => {
   const [{ auth, notification }, dispatch] = useStore();
   const [isRemoving, setIsRemoving] = useState();
@@ -75,8 +77,9 @@ const UserLocationsList = ({ history }) => {
   const linkToLocation = location => {
     console.log("location", location);
     // * using shortened ID
-    const shortenedID = location.id;
-    history.push(`/location/${shortenedID}`);
+    //const shortenedID = location.id;
+    //history.push(`/location/${shortenedID}`);
+    dispatch({ type: UI_SELECTED_MARKER, location });
   };
   return (
     <div>
@@ -86,6 +89,8 @@ const UserLocationsList = ({ history }) => {
             <th>Name</th>
             <th>Description</th>
             <th>Type</th>
+            <th>Assigned</th>
+            <th>Done</th>
             <th />
           </tr>
         </thead>
@@ -95,6 +100,13 @@ const UserLocationsList = ({ history }) => {
               <td>{l.name}</td>
               <td>{truncate(l.description, 25, true)}</td>
               <td>{l.type}</td>
+              <td>{l.assigned && "Johnny"}</td>
+              <td>{l.resolved && <FontAwesomeIcon
+                  className="mx-2"
+                  icon="check-circle"
+                />
+                }</td>
+                
               <td>
                 {isRemoving === l.id ? (
                   <FontAwesomeIcon className="mx-2" icon="spinner" spin />

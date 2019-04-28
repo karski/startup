@@ -24,7 +24,7 @@ const Navi = props => {
     <div id="navbar">
       <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="#home">
-          <Link to="/">ControlFreak</Link>
+          <Link to="/">SynchroLive!</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="basic-navbar-nav">
