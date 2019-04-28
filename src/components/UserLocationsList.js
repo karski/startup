@@ -16,6 +16,7 @@ import { truncate } from "../utils";
 import shortid from "shortid";
 import { useCollection } from "react-firebase-hooks/firestore";
 
+import { UI_SELECTED_MARKER } from "../reducers/actions";
 const UserLocationsList = ({ history, db }) => {
   const [{ auth, notification }, dispatch] = useStore();
   const [isRemoving, setIsRemoving] = useState();
@@ -89,8 +90,9 @@ const UserLocationsList = ({ history, db }) => {
   const linkToLocation = location => {
     console.log("location", location);
     // * using shortened ID
-    const shortenedID = location.id;
-    history.push(`/location/${shortenedID}`);
+    //const shortenedID = location.id;
+    //history.push(`/location/${shortenedID}`);
+    dispatch({ type: UI_SELECTED_MARKER, location });
   };
   return (
     <div>
@@ -100,6 +102,8 @@ const UserLocationsList = ({ history, db }) => {
             <th>Name</th>
             <th>Description</th>
             <th>Type</th>
+            <th>Assigned</th>
+            <th>Done</th>
             <th />
           </tr>
         </thead>
@@ -110,31 +114,35 @@ const UserLocationsList = ({ history, db }) => {
                 <td>{l.name}</td>
                 <td>{truncate(l.description, 25, true)}</td>
                 <td>{l.type}</td>
+                <td>{l.assigned && "Johnny"}</td>
                 <td>
-                  {isRemoving === l.id ? (
+                  {l.resolved && (
+                    <FontAwesomeIcon className="mx-2" icon="check-circle" />
+                  )}
+                </td>
+
+                <td>
+                  {/* {isRemoving === l.id ? (
                     <FontAwesomeIcon className="mx-2" icon="spinner" spin />
-                  ) : (
+                  ) : ( */}
+                  <div>
                     <FontAwesomeIcon
                       className="mx-2"
-                      onClick={() => removeLocation(l)}
-                      icon="trash-alt"
+                      onClick={() => editLocation(l)}
+                      icon="edit"
                     />
-                  )}
-                  <FontAwesomeIcon
-                    className="mx-2"
-                    onClick={() => editLocation(l)}
-                    icon="edit"
-                  />
-                  <FontAwesomeIcon
-                    className="mx-2"
-                    onClick={() => addComment(l)}
-                    icon="comment"
-                  />
-                  <FontAwesomeIcon
-                    className="mx-2"
-                    onClick={() => linkToLocation(l)}
-                    icon="external-link-alt"
-                  />
+                    <FontAwesomeIcon
+                      className="mx-2"
+                      onClick={() => addComment(l)}
+                      icon="comment"
+                    />
+                    <FontAwesomeIcon
+                      className="mx-2"
+                      onClick={() => linkToLocation(l)}
+                      icon="external-link-alt"
+                    />
+                  </div>
+                  {/* )} */}
                 </td>
               </tr>
             ))}

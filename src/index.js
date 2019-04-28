@@ -26,7 +26,8 @@ import {
   faStickyNote,
   faStar,
   faExternalLinkAlt,
-  faPoop
+  faPoop,
+  faCheckCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -45,7 +46,8 @@ library.add(
   faExclamation,
   faStickyNote,
   faStar,
-  faPoop
+  faPoop,
+  faCheckCircle
 );
 
 Amplify.configure({
