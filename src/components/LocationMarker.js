@@ -5,6 +5,8 @@ import { marker } from "../constants";
 
 const LocationMarker = ({ location, onMarkerClick }) => {
   let mark = marker[location.type];
+  console.log("tyupe", location.type);
+  console.log("mark", mark);
   return (
     <span onClick={() => onMarkerClick(location)}>
       <svg
@@ -16,7 +18,7 @@ const LocationMarker = ({ location, onMarkerClick }) => {
       >
         <defs />
         <g stroke="none" strokeWidth="1" fill="none">
-          <g id="map-marker-point" fill={mark.pinColor}>
+          <g id="map-marker-point" fill={mark.pinColor || "blue"}>
             <ellipse
               id="Oval-1"
               fillOpacity="0.167006341"

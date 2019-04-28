@@ -14,17 +14,31 @@ import { useStore, useUserLocations } from "../hooks";
 import { NOTIFICATION_CLOSE, NOTIFICATION_NEW } from "../reducers/actions";
 import { truncate } from "../utils";
 import shortid from "shortid";
+import { useCollection } from "react-firebase-hooks/firestore";
 
-const UserLocationsList = ({ history }) => {
+const UserLocationsList = ({ history, db }) => {
   const [{ auth, notification }, dispatch] = useStore();
   const [isRemoving, setIsRemoving] = useState();
   const [isBeingEdited, setIsBeingEdited] = useState();
   const [isBeingCommented, setIsBeingCommented] = useState();
   const [fetchKey, setFetchKey] = useState(shortid.generate());
   // let locations = useUserLocations(auth.user, fetchKey);
+  // const { error, loading, value } = useCollection(db.collection("tasks"));
 
   let locations = [];
-  locations = JSON.parse(localStorage.getItem("tasks"));
+  const { error, loading, value } = useCollection(db.collection("tasks"));
+  if (value) {
+    const temp = value.docs;
+    console.log("locations", locations);
+    locations = temp.map(l => {
+      // console.log("cc", l.data());
+      return l.data();
+    });
+  }
+  // if (value) {
+  //   console.log(value, "ccccccccccccccccccc");
+  // }
+  // locations = JSON.parse(localStorage.getItem("tasks"));
   // TODO: Is there another way of updating locations than changing key
   // * DeltaQueries, Subscriptions?
   const removeLocation = async location => {
@@ -90,39 +104,40 @@ const UserLocationsList = ({ history }) => {
           </tr>
         </thead>
         <tbody>
-          {locations && locations.map(l => (
-            <tr key={l.id}>
-              <td>{l.name}</td>
-              <td>{truncate(l.description, 25, true)}</td>
-              <td>{l.type}</td>
-              <td>
-                {isRemoving === l.id ? (
-                  <FontAwesomeIcon className="mx-2" icon="spinner" spin />
-                ) : (
+          {locations &&
+            locations.map(l => (
+              <tr key={l.id}>
+                <td>{l.name}</td>
+                <td>{truncate(l.description, 25, true)}</td>
+                <td>{l.type}</td>
+                <td>
+                  {isRemoving === l.id ? (
+                    <FontAwesomeIcon className="mx-2" icon="spinner" spin />
+                  ) : (
+                    <FontAwesomeIcon
+                      className="mx-2"
+                      onClick={() => removeLocation(l)}
+                      icon="trash-alt"
+                    />
+                  )}
                   <FontAwesomeIcon
                     className="mx-2"
-                    onClick={() => removeLocation(l)}
-                    icon="trash-alt"
+                    onClick={() => editLocation(l)}
+                    icon="edit"
                   />
-                )}
-                <FontAwesomeIcon
-                  className="mx-2"
-                  onClick={() => editLocation(l)}
-                  icon="edit"
-                />
-                <FontAwesomeIcon
-                  className="mx-2"
-                  onClick={() => addComment(l)}
-                  icon="comment"
-                />
-                <FontAwesomeIcon
-                  className="mx-2"
-                  onClick={() => linkToLocation(l)}
-                  icon="external-link-alt"
-                />
-              </td>
-            </tr>
-          ))}
+                  <FontAwesomeIcon
+                    className="mx-2"
+                    onClick={() => addComment(l)}
+                    icon="comment"
+                  />
+                  <FontAwesomeIcon
+                    className="mx-2"
+                    onClick={() => linkToLocation(l)}
+                    icon="external-link-alt"
+                  />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </Table>
       {isBeingEdited && (

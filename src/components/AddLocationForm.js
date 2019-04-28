@@ -237,7 +237,7 @@ const AddLocationForm = ({
                   <option>Sanitation</option>
                   <option>Supplies</option>
                   <option>Technical</option>
-                  <option>Stewarts</option>
+                  <option>Stewards</option>
                   <option>Medical</option>
                 </Form.Control>
               </Form.Group>

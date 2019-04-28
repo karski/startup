@@ -34,10 +34,11 @@ const Map = props => {
   // locations = JSON.parse(localStorage.getItem("tasks"));
   const { error, loading, value } = useCollection(props.db.collection("tasks"));
   if (value) {
-    locations = value.docs;
+    const temp = value.docs;
     console.log("locations", locations);
-    locations.map(l => {
-      console.log("cc", l.data());
+    locations = temp.map(l => {
+      // console.log("cc", l.data());
+      return l.data();
     });
   }
 
@@ -84,7 +85,7 @@ const Map = props => {
           markerPositionAlreadySet={map.markerPosition}
         />
         <div id="location-list">
-          <UserLocationList />
+          <UserLocationList db={props.db} />
         </div>
         <ReactMapGL
           ref={map => (mapRef = map)}
@@ -108,7 +109,7 @@ const Map = props => {
             />
           )}
           <AllLocationsMarkers
-            // locations={locations}
+            locations={locations}
             selectedMarker={selectedMarker}
             setSelectedMarker={setSelectedMarker}
           />

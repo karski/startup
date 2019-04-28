@@ -14,6 +14,7 @@ function AllLocationsMarkers({ locations }) {
   if (!locations) {
     return null;
   }
+  console.log("alllocations marker", locations);
   return (
     <>
       {locations.length !== 0
