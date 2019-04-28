@@ -1,0 +1,29 @@
+.masonry-card {
+  display: inline-block;
+  box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.4);
+
+  > div,
+  > p.card-text {
+    padding: 0.5rem;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+}
+
+.card-columns {
+  @include media-breakpoint-only(xs) {
+    column-count: 1;
+  }
+  @include media-breakpoint-only(sm) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(md) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(lg) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 4;
+  }
+}

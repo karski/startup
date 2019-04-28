@@ -1,0 +1,33 @@
+.marker {
+  background-image: url("../assets//red_location_marker.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.standard-marker {
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: url("./icons/red-marker.svg") no-repeat;
+}
+
+.location-info-box {
+  h5 {
+    font-weight: 500;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $gray-300;
+  }
+  h6 {
+    color: $gray-600;
+  }
+  p.grey {
+    color: $gray-700;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+}

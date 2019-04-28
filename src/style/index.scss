@@ -1,0 +1,73 @@
+@import "./colors";
+@import "./variables";
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/include-media/dist/include-media";
+@import "./navbar";
+@import "./loadingbar";
+@import "./sidebar";
+@import "./map";
+@import "./masonry";
+@import "./modal";
+@import "./bottom-bar.scss";
+@import "./add-location-form";
+
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+#page-wrapper {
+  flex: 1;
+  background: $body-bg;
+  > div {
+    // margin: 1rem;
+  }
+}
+
+#home {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+  position: relative;
+}
+
+#add-location-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+}
+
+.img-upload-comment {
+  margin: 0 1rem;
+  padding: 0.5rem;
+  max-width: 12rem;
+  border: 2px $gray-700 dotted;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.comment-img {
+  width: auto;
+  height: 2rem;
+  border-radius: 0.25rem;
+  @extend .m-2;
+}
+
+#single-location {
+  .card-header {
+    background: $primary;
+    color: $white;
+    h4 {
+      margin-bottom: 0;
+    }
+    border-bottom: 3px $aqua solid;
+  }
+}

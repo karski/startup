@@ -1,0 +1,14 @@
+#navbar {
+  .navbar-nav a,
+  a.login-link {
+    color: $white;
+    padding: 0 1rem;
+  }
+  #dropdown-basic {
+    button {
+      background: inherit;
+      border: none;
+      padding: 0;
+    }
+  }
+}

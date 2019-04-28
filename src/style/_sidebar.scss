@@ -1,0 +1,22 @@
+#sidebar {
+  position: fixed;
+  opacity: 0.5rem;
+  top: 56px;
+  right: 0;
+  z-index: 3;
+  width: $width__sidebar;
+  max-height: 100vh;
+  background-color: $gray-100;
+  border-left: 2px $gray-400 solid;
+  transition: 0.4s;
+  overflow: auto;
+  &.is-closed {
+    transform: translateX(41vw);
+  }
+  @include media-breakpoint-down(lg) {
+    width: 80vw;
+    &.is-closed {
+      transform: translateX(81vw);
+    }
+  }
+}

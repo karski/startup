@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "feedback-map-react-20190324204937-authRole",
+            "UnauthRoleArn": "arn:aws:iam::644094571671:role/feedback-map-react-20190324204937-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::644094571671:role/feedback-map-react-20190324204937-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "feedback-map-react-20190324204937-deployment",
+            "UnauthRoleName": "feedback-map-react-20190324204937-unauthRole",
+            "StackName": "feedback-map-react-20190324204937",
+            "StackId": "arn:aws:cloudformation:us-west-2:644094571671:stack/feedback-map-react-20190324204937/031c8750-4eb1-11e9-bc30-024aa56edfa6"
+        },
+        "categories": {
+            "auth": {
+                "cognito28695383": {}
+            }
+        }
+    }
+}
