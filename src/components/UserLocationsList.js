@@ -30,12 +30,22 @@ const UserLocationsList = ({ history, db }) => {
   const { error, loading, value } = useCollection(db.collection("tasks"));
   if (value) {
     const temp = value.docs;
-    console.log("locations", locations);
     locations = temp.map(l => {
       // console.log("cc", l.data());
       return l.data();
     });
   }
+  console.log("locations11111", locations);
+  var date_sort_asc = function(l1, l2) {
+    // This is a comparison function that will result in dates being sorted in
+    // ASCENDING order. As you can see, JavaScript's native comparison operators
+    // can be used to compare dates. This was news to me.
+    if (new Date(l1.date) > new Date(l2.date)) return 1;
+    if (new Date(l1.date) < new Date(l2.date)) return -1;
+    return 0;
+  };
+  locations = locations.sort(date_sort_asc).reverse();
+  console.log("sorted Locations", locations);
   // if (value) {
   //   console.log(value, "ccccccccccccccccccc");
   // }
