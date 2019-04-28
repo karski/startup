@@ -74,7 +74,7 @@ const UserLocationsList = ({ history, db }) => {
   };
 
   const doneUpdating = () => {
-    setIsBeingEdited();
+    setIsBeingEdited(false);
     setFetchKey(shortid.generate());
   };
 

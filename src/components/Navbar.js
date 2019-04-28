@@ -30,11 +30,11 @@ const Navi = props => {
         <Navbar.Collapse className="basic-navbar-nav">
           <Nav className="mr-auto">
             <Link to="/">Map</Link>
-            <Link to="/settings">Overview</Link>
+            {/* <Link to="/settings">Overview</Link> */}
           </Nav>
           <Dropdown id="dropdown-basic" alignRight>
             <Dropdown.Toggle>
-              <Navbar.Text>Signed in as: {name}</Navbar.Text>
+              <Navbar.Text>Signed in as: MASTER OF OPERATIONS</Navbar.Text>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => props.history.push("/settings")}>
