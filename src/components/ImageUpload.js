@@ -8,7 +8,10 @@ import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL } from "../constants";
 
 import { NOTIFICATION_CLOSE, NOTIFICATION_NEW } from "../reducers/actions";
 
-function ImageUpload({ user, callback, stylingClass, text }) {
+function ImageUpload({ callback, stylingClass, text }) {
+  let user = {
+    id: "festival"
+  };
   const [isUploading, setIsUploading] = useState(false);
   const [uploadedFile, setUploadedFile] = useState();
   const [progress, setProgress] = useState(0);
@@ -87,7 +90,6 @@ ImageUpload.defaultProps = {
 };
 
 ImageUpload.propTypes = {
-  user: PropTypes.object.isRequired,
   callback: PropTypes.func.isRequired,
   stylingClass: PropTypes.string,
   text: PropTypes.string

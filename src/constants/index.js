@@ -18,7 +18,7 @@ export const marker = {
   },
   Sanitation: { pinColor: "#01ff70", icon: "poop" },
   Supplies: { pinColor: "#7fdbff ", icon: "arrow-circle-up" },
-  Broken: { pinColor: "#f012be", icon: "exclamation" }
-  // Suggestion: { pinColor: "#ffdc00", icon: "sticky-note" },
-  // Favorite: { pinColor: "#ff851b", icon: "star" }
+  Broken: { pinColor: "#f012be", icon: "exclamation" },
+  Stewarts: { pinColor: "#ffdc00", icon: "sticky-note" },
+  Medicals: { pinColor: "#ff851b", icon: "star" }
 };

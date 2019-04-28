@@ -102,7 +102,7 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
           type: NOTIFICATION_NEW,
           category: "updated_location",
           variant: "primary",
-          text: `${result.data.updateLocation.name} updated`
+          text: `New Task added`
         });
         setTimeout(() => {
           dispatch({ type: NOTIFICATION_CLOSE, category: "updated_location" });
@@ -127,8 +127,8 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
           ...values,
           date: new Date().toString(),
           // locationAreaId: auth.user.area.id,
-          locationAreaId: auth.user.area.id,
-          locationUserId: auth.user.id,
+          // locationAreaId: auth.user.area.id,
+          // locationUserId: auth.user.id,
           position: {
             lat,
             lng
@@ -142,13 +142,18 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
         //   })
         // );
         // TODO: setup firebase
+        const tasks = JSON.parse(localStorage.getItem("tasks"));
+        console.log("old tasks", tasks);
+        const newTasks = [...tasks, input];
+
+        localStorage.setItem("tasks", JSON.stringify(newTasks));
         let result = " placeholder";
         dispatch({ type: UI_IS_ADDING_LOCATION, payload: false });
         dispatch({
           type: NOTIFICATION_NEW,
           category: "new_location",
           variant: "primary",
-          text: `${result.data.createLocation.name} added`
+          text: `New Task Added`
         });
         setTimeout(() => {
           dispatch({ type: NOTIFICATION_CLOSE, category: "new_location" });
@@ -189,11 +194,11 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
           <Col>
             <Form onSubmit={formSubmit}>
               <Form.Group>
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Task Description</Form.Label>
                 <Form.Control
                   onChange={handleChange}
                   type="text"
-                  placeholder="placename etc"
+                  placeholder="new task"
                   name="name"
                   value={values.name}
                 />
@@ -206,12 +211,12 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
                   onChange={handleChange}
                   value={values.type}
                 >
-                  <option>LikeIt</option>
-                  <option>HateIt</option>
-                  <option>Improvement</option>
-                  <option>FixIt</option>
-                  <option>Suggestion</option>
-                  <option>Favorite</option>
+                  <option>Security</option>
+                  <option>Sanitation</option>
+                  <option>Supplies</option>
+                  <option>Broken</option>
+                  <option>Stewarts</option>
+                  <option>Medical</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group>
@@ -220,7 +225,7 @@ const AddLocationForm = ({ formValues = emptyForm, doneUpdating = null }) => {
                   as="textarea"
                   rows="3"
                   onChange={handleChange}
-                  placeholder="more text"
+                  placeholder="describe your task"
                   name="description"
                   value={values.description}
                 />
