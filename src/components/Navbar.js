@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { Navbar, Nav, Dropdown } from "react-bootstrap";
 import get from "lodash/get";
+import logo from "../assets/SLlogo.png";
 
 import { useStore } from "../hooks/index";
 import { AUTH_LOGOUT } from "../reducers/actions";
@@ -23,8 +24,9 @@ const Navi = props => {
   return (
     <div id="navbar">
       <Navbar bg="dark" variant="dark" expand="lg">
+        <img src={logo} alt="SynchroLive logo" id="logo" />
         <Navbar.Brand href="#home">
-          <Link to="/">SynchroLive!</Link>
+          <Link to="/" class="blue">SynchroLive!</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="basic-navbar-nav">
