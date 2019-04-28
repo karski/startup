@@ -48,7 +48,6 @@ const AddLocationForm = ({
     try {
       if (
         values.name.length > 0 &&
-        values.description.length > 0 &&
         values.type
       ) {
         setIsValid(true);
@@ -101,6 +100,9 @@ const AddLocationForm = ({
           locationPicture: imageUrl,
           key: shortid.generate()
         };
+        if(input.values.description.length <1){
+          input.values.description = "Issue Reported";
+        }
         // const result = await API.graphql(
         //   graphqlOperation(updateLocation, {
         //     input
