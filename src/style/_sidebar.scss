@@ -2,21 +2,21 @@
   position: fixed;
   opacity: 0.5rem;
   top: 56px;
-  right: 0;
+  left: 39vw;
   z-index: 3;
-  width: $width__sidebar;
+  width: 35vw;
   max-height: 100vh;
   background-color: $gray-100;
-  border-left: 2px $gray-400 solid;
+  // border-left: 2px $gray-400 solid;
   transition: 0.4s;
   overflow: auto;
   &.is-closed {
-    transform: translateX(41vw);
+    transform: translateX(-41vw);
   }
-  @include media-breakpoint-down(lg) {
-    width: 80vw;
-    &.is-closed {
-      transform: translateX(81vw);
-    }
-  }
+  // @include media-breakpoint-down(lg) {
+  //   width: 80vw;
+  //   &.is-closed {
+  //     transform: translateX(81vw);
+  //   }
+  // }
 }

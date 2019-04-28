@@ -29,7 +29,7 @@ const Navi = props => {
         <Navbar.Toggle />
         <Navbar.Collapse className="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/">Home</Link>
+            <Link to="/">Map</Link>
             <Link to="/settings">Overview</Link>
           </Nav>
           <Dropdown id="dropdown-basic" alignRight>

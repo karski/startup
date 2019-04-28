@@ -1,9 +1,9 @@
 #bottom-bar {
   // height: 2rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  left: 0;
   right: 0;
+  width: 30vw;
   z-index: 10;
   // padding: 0.6rem 1rem;
   color: $white;

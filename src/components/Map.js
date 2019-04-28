@@ -83,7 +83,9 @@ const Map = props => {
           clickAddLocationButton={handleOnAddLocationButtonClick}
           markerPositionAlreadySet={map.markerPosition}
         />
-        <UserLocationList />
+        <div id="location-list">
+          <UserLocationList />
+        </div>
         <ReactMapGL
           ref={map => (mapRef = map)}
           {...viewport}

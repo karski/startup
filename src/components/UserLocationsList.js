@@ -90,7 +90,7 @@ const UserLocationsList = ({ history }) => {
           </tr>
         </thead>
         <tbody>
-          {locations.map(l => (
+          {locations && locations.map(l => (
             <tr key={l.id}>
               <td>{l.name}</td>
               <td>{truncate(l.description, 25, true)}</td>
