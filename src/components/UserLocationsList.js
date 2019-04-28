@@ -118,7 +118,7 @@ const UserLocationsList = ({ history, db }) => {
                 rowColor = "green";
               }
               return (
-                <tr key={l.id} className={rowColor}>
+                <tr key={l.key} className={rowColor}>
                   <td>{l.name}</td>
                   <td>{truncate(l.description, 25, true)}</td>
                   <td>{l.type}</td>
