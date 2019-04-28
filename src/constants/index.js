@@ -20,5 +20,5 @@ export const marker = {
   Supplies: { pinColor: "#7fdbff ", icon: "arrow-circle-up" },
   Technical: { pinColor: "#f012be", icon: "exclamation" },
   Stewards: { pinColor: "#ffdc00", icon: "sticky-note" },
-  Medicals: { pinColor: "#ff851b", icon: "star" }
+  Medical: { pinColor: "#ff851b", icon: "star" }
 };

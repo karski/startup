@@ -9,6 +9,8 @@ import ImageWithModal from "./ImageWithModal";
 
 import AddLocationForm from "./AddLocationForm";
 
+
+
 function SelectedMarkerInfo({ location }) {
   console.log("aaaaa", location);
   const shortenedID = location.id;
@@ -16,6 +18,8 @@ function SelectedMarkerInfo({ location }) {
   const closeSidebar = () => {
     dispatch({ type: UI_SELECTED_MARKER, location: null });
   };
+
+
   return (
     <div id="selected-marker-info">
       <Card>
@@ -39,10 +43,17 @@ function SelectedMarkerInfo({ location }) {
               Head over to the detailed view
             </Link>
           </Card.Subtitle>
-          <AddLocationForm
-          formValues={true}
-          doneUpdating={true}
-        />
+          <Button
+            onClick={closeSidebar}
+            block
+            size="sm"
+            variant="primary"
+            className="mt-3"
+          >
+            Edit
+          </Button>
+
+
           <Button
             onClick={closeSidebar}
             block
