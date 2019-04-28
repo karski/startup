@@ -90,8 +90,8 @@ const UserLocationsList = ({ history, db }) => {
   const linkToLocation = location => {
     console.log("location", location);
     // * using shortened ID
-    //const shortenedID = location.id;
-    //history.push(`/location/${shortenedID}`);
+    const shortenedID = location.key;
+    history.push(`/location/${shortenedID}`);
     dispatch({ type: UI_SELECTED_MARKER, location });
   };
   return (
@@ -109,43 +109,52 @@ const UserLocationsList = ({ history, db }) => {
         </thead>
         <tbody>
           {locations &&
-            locations.map(l => (
-              <tr key={l.id}>
-                <td>{l.name}</td>
-                <td>{truncate(l.description, 25, true)}</td>
-                <td>{l.type}</td>
-                <td>{l.assigned && "Johnny"}</td>
-                <td>
-                  {l.resolved && (
-                    <FontAwesomeIcon className="mx-2" icon="check-circle" />
-                  )}
-                </td>
+            locations.map(l => {
+              let rowColor = "red";
+              if (l.assigned) {
+                rowColor = "blue";
+              }
+              if (l.resolved) {
+                rowColor = "green";
+              }
+              return (
+                <tr key={l.id} className={rowColor}>
+                  <td>{l.name}</td>
+                  <td>{truncate(l.description, 25, true)}</td>
+                  <td>{l.type}</td>
+                  <td>{l.assigned && "Johnny"}</td>
+                  <td>
+                    {l.resolved && (
+                      <FontAwesomeIcon className="mx-2" icon="check-circle" />
+                    )}
+                  </td>
 
-                <td>
-                  {/* {isRemoving === l.id ? (
+                  <td>
+                    {/* {isRemoving === l.id ? (
                     <FontAwesomeIcon className="mx-2" icon="spinner" spin />
                   ) : ( */}
-                  <div>
-                    <FontAwesomeIcon
-                      className="mx-2"
-                      onClick={() => editLocation(l)}
-                      icon="edit"
-                    />
-                    <FontAwesomeIcon
-                      className="mx-2"
-                      onClick={() => addComment(l)}
-                      icon="comment"
-                    />
-                    <FontAwesomeIcon
-                      className="mx-2"
-                      onClick={() => linkToLocation(l)}
-                      icon="external-link-alt"
-                    />
-                  </div>
-                  {/* )} */}
-                </td>
-              </tr>
-            ))}
+                    <div>
+                      <FontAwesomeIcon
+                        className="mx-2"
+                        onClick={() => editLocation(l)}
+                        icon="edit"
+                      />
+                      <FontAwesomeIcon
+                        className="mx-2"
+                        onClick={() => addComment(l)}
+                        icon="comment"
+                      />
+                      <FontAwesomeIcon
+                        className="mx-2"
+                        onClick={() => linkToLocation(l)}
+                        icon="external-link-alt"
+                      />
+                    </div>
+                    {/* )} */}
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </Table>
       {isBeingEdited && (

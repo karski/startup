@@ -32,7 +32,7 @@
   height: 100%;
 }
 
-#location-list{
+#location-list {
   width: 45vw;
 }
 
@@ -74,4 +74,14 @@
     }
     border-bottom: 3px $aqua solid;
   }
+}
+
+.red {
+  color: #fe6f70 !important;
+}
+.blue {
+  color: #32a3f5 !important;
+}
+.green {
+  color: #42b15e !important;
 }
